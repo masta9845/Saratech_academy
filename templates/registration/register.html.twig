@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-8">
+            {# Ou 6 #}
+                <div class="register-form">
+                <div class="text-center">
+                    <h1 class="text-6xl pt-12 pb-8">
+                        Formulaire dinscription
+                    </h1>
+                </div>
+                    
+                    {{ form_start(registrationForm) }}
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            {{ form_widget(registrationForm.nom, { 'attr': {'placeholder': 'Nom', 'required': 'required'} }) }}
+                            {{ form_errors(registrationForm.nom) }}
+                        </div>
+                        <div class="col-6 form-group">
+                            {{ form_widget(registrationForm.prenom, { 'attr': { 'placeholder': 'Prenom', 'required': 'required'} }) }}
+                            {{ form_errors(registrationForm.prenom) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            {{ form_widget(registrationForm.numero, { 'attr': { 'placeholder': 'Numero', 'required': 'required'} }) }}
+                            {{ form_errors(registrationForm.numero) }}
+                        </div>
+                        <div class="col-6 form-group">
+                            {{ form_widget(registrationForm.email, { 'attr': { 'placeholder': 'Adresse email', 'required': 'required'} }) }}
+                            {{ form_errors(registrationForm.email) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            {{ form_widget(registrationForm.niveauetude, { 'attr': {'placeholder': 'Niveau d\'étude', 'required': 'required'} }) }}
+                            {{ form_errors(registrationForm.niveauetude) }}
+                        </div>
+                        <div class="col-6 form-group">
+                            {{ form_widget(registrationForm.etablissement, { 'attr': { 'placeholder': 'Établissement', 'required': 'required'} }) }}
+                            {{ form_errors(registrationForm.etablissement) }}
+                        </div>
+                    </div>
+                    <div class="col-6 form-group">
+                        {{ form_row(registrationForm.plainPassword) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.agreeTerms) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary py-2 px-5" type="submit" style="border-radius: 20px;">S'inscrire</button
+                        
+                    </div>
+                    {{ form_end(registrationForm) }}
+                 </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

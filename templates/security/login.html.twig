@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <div class="login-form text-center">
+                    <div class="text-center mb-5">
+                        <h1 class="text-6xl pt-12 pb-8">
+                            Se Connecter 
+                        </h1>
+                    </div>
+                    {% for message in app.flashes('success')%}
+                    <div class="alert alert-success mt-4"> 
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                    <form method="post">
+                        {% if error %}
+                            {# <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
+                            <div class="alert alert-danger">
+                                {{ 'Le numéro ou le mot de passe saisie est incorrect' }}
+                            </div>
+                            {# <div class="alert alert-danger">
+                                {% if error.messageKey == 'Invalid credentials.' %}
+                                    {% if error.messageData.username is defined %}
+                                        Le numéro est incorrect.
+                                    {% elseif error.messageData.password is defined %}
+                                        Le mot de passe est incorrect.
+                                    {% else %}
+                                        Les identifiants sont incorrects.
+                                    {% endif %}
+                                {% else %}
+                                    {{ 'Votre message d\'erreur personnalisé ici' }}
+                                {% endif %}
+                            </div> #}
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-3">
+                                Vous êtes connecté sur ce numéro  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group mb-5">
+                            <input 
+                                type="text" 
+                                value="{{ last_username }}" 
+                                name="numero" 
+                                id="inputNumero" 
+                                class="form-control border-top-0 border-right-0 border-left-0 p-0" 
+                                placeholder="Numero de telephone"
+                                autocomplete="username" 
+                                required 
+                                autofocus
+                            >
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input 
+                                type="password" 
+                                name="password" 
+                                id="inputPassword" 
+                                class="form-control border-top-0 border-right-0 border-left-0 p-0" 
+                                autocomplete="current-password" 
+                                placeholder="Mot de passe "
+                                required
+                            >
+                        </div>
+
+                        <input 
+                            type="hidden" 
+                            name="_csrf_token"
+                            value="{{ csrf_token('authenticate') }}"
+                        >
+
+                        <div class="text-center">
+                            <button 
+                                class="btn btn-primary py-3 px-5 rounded-full" 
+                                type="submit" style="border-radius: 20px;">
+                                Connexion
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
